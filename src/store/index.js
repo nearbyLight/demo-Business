@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     collapsed: false,
     user: getCookies(),
+    // 把路由定义到数据仓库中，页面中随时随地都可以拿到
+    menuRoutes: [],
   },
   mutations: {
     changeCollapsed(state) {
@@ -24,6 +26,10 @@ export default new Vuex.Store({
         email: '',
       };
     },
+    // 改变角色的路由权限
+    changeMenuRoutes(state, routes) {
+      state.menuRoutes = routes;
+    },
   },
   actions: {
     changeCollapsed({ commit }) {
@@ -36,6 +42,10 @@ export default new Vuex.Store({
     removeUser({ commit }) {
       commit('removeUser');
       removeCookies();
+    },
+    // 改变角色的路由权限
+    changeMenuRoutes({ commit }, routes) {
+      commit('changeMenuRoutes', routes);
     },
   },
   modules: {
