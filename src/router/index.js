@@ -27,6 +27,8 @@ const ayncMenuRoute = [{
   name: 'Product',
   meta: {
     title: '商品',
+    hidden: false,
+    icon: 'project',
   },
   component: Home,
   children: [{
@@ -34,6 +36,8 @@ const ayncMenuRoute = [{
     name: 'ProductList',
     meta: {
       title: '商品列表',
+      hidden: false,
+      icon: 'unordered-list',
     },
     component: () => import('@/views/page/productList.vue'),
   },
@@ -42,6 +46,8 @@ const ayncMenuRoute = [{
     name: 'ProductAdd',
     meta: {
       title: '新增商品',
+      hidden: false,
+      icon: 'diff',
     },
     component: () => import('@/views/page/productAdd.vue'),
   }, {
@@ -49,6 +55,8 @@ const ayncMenuRoute = [{
     name: 'Category',
     meta: {
       title: '类目管理',
+      hidden: false,
+      icon: 'edit',
     },
     component: () => import('@/views/page/category.vue'),
   }],
@@ -61,6 +69,8 @@ const routes = [
     component: Home,
     meta: {
       title: '首页',
+      hidden: false,
+      icon: 'home',
     },
     children: [{
       path: '/index',
@@ -68,6 +78,8 @@ const routes = [
       component: () => import('../views/page/index.vue'),
       meta: {
         title: '统计',
+        hidden: false,
+        icon: 'fund',
       },
     }],
   },
@@ -77,6 +89,7 @@ const routes = [
     component: Login,
     meta: {
       title: '登录',
+      hidden: true,
     },
   },
 ];
@@ -95,10 +108,13 @@ router.beforeEach((to, from, next) => {
         const menuRoute = getMenuRoute(store.state.user.role, ayncMenuRoute);
         // 因为 router.addRouter()  方法只能放入“一个对象”/“一个字符，一个对象”， 所以这里进行转化成一个对象
         const value = menuRoute[0];
-        // router.addRouter()  方法只能放入“一个对象”/“一个字符，一个对象”
-        router.addRoute(value);
         // 这里执行数据仓库中的函数，改变数据仓库中数据（menuRoutes）的状态
-        store.dispatch('changeMenuRoutes', routes.concat(menuRoute));
+        // 为什么用 .then  因为直接跳转到某些页面的时候， 因为还没有拿到路由而跳转不过去，这里使用then 之后，说明： 先等拿到路由权限，然后进行跳转
+        store.dispatch('changeMenuRoutes', routes.concat(menuRoute)).then(() => {
+          // router.addRouter()  方法只能放入“一个对象”/“一个字符，一个对象”
+          router.addRoute(value);
+          next();
+        });
         isAddRoute = true;
       }
       return next();
