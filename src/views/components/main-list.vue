@@ -10,8 +10,8 @@
     <!-- 面包屑导航 -->
     <div class="breakcmurb">
       <a-breadcrumb>
-        <a-breadcrumb-item>Home</a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
+        <a-breadcrumb-item>{{$route.matched[0].meta.title}}</a-breadcrumb-item>
+        <a-breadcrumb-item><a href="">{{$route.matched[1].meta.title}}</a></a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <!-- 用户信息 -->
@@ -33,6 +33,14 @@ export default {
       this.$router.push({
         name: 'Login',
       });
+    },
+  },
+  mounted() {
+    console.log(this.$route);
+  },
+  watch: {
+    $router() {
+      console.log(this.$route);
     },
   },
 };
