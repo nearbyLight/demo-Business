@@ -51,6 +51,15 @@ const ayncMenuRoute = [{
     },
     component: () => import('@/views/page/productAdd.vue'),
   }, {
+    path: 'edit/:id',
+    name: 'ProductEdit',
+    meta: {
+      title: '新增商品',
+      hidden: true,
+      icon: 'diff',
+    },
+    component: () => import('@/views/page/productAdd.vue'),
+  }, {
     path: 'category',
     name: 'Category',
     meta: {

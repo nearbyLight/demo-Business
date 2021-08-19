@@ -14,6 +14,8 @@ const roleRoute = {
       name: 'ProductAdd',
     }, {
       name: 'Category',
+    }, {
+      name: 'ProductEdit',
     },
   ],
   coustomer: [
@@ -23,6 +25,8 @@ const roleRoute = {
       name: 'ProductList',
     }, {
       name: 'ProductAdd',
+    }, {
+      name: 'ProductEdit',
     },
   ],
 };

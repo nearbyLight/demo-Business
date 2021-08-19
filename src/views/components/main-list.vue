@@ -17,7 +17,7 @@
     <!-- 用户信息 -->
     <ul class="user-info">
       <li>{{ $store.state.user.username }}<a-icon type="down" /></li>
-      <li @click="loginOut">退出</li>
+      <li class="out" @click="loginOut">退出</li>
     </ul>
   </div>
 </template>
@@ -35,16 +35,16 @@ export default {
       });
     },
   },
-  mounted() {
-    console.log(this.$route);
-  },
-  watch: {
-    $router() {
-      console.log(this.$route);
-    },
+  created() {
+    console.log(this.$router);
   },
 };
 </script>
 
-<style>
+<style lang='less'>
+.user-info{
+  position: fixed;
+  right: 0;
+  top: 0;
+}
 </style>
