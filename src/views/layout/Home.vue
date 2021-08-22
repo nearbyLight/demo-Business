@@ -25,9 +25,6 @@ export default {
       key: new Date().getTime(),
     };
   },
-  created() {
-    console.log(this.$route);
-  },
   watch: {
     $route() {
       this.key = new Date().getTime();

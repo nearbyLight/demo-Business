@@ -87,7 +87,6 @@ export default {
   },
   methods: {
     changePage(page) {
-      console.log(page);
       this.$emit('change', page);
     },
     productEdit(record) {
